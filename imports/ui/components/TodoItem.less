@@ -15,6 +15,8 @@
   }
   input[type="text"] { flex: 1; }
   .delete-item { flex: 0 0 3rem; }
+//c4w 8.7
+  .edit-item { flex: 0 0 3rem; }
 
 
   // Style of list-item children
@@ -34,6 +36,16 @@
     &:active { color: @color-well; }
     .icon-trash { font-size: 1.1em; }
   }
+//c4w 8.7
+  .edit-item {
+    color: @color-medium-rare;
+    line-height: 3rem;
+    text-align: center;
+
+    &:hover { color: @color-primary; }
+    &:active { color: @color-well; }
+    .icon-edit { font-size: 1.1em; }
+  }
 
 
   // Border between list items
@@ -47,9 +59,17 @@
     }
 
     .delete-item { display: inline-block; }
+    //c4w 8.7
+    .edit-item { display: inline-block; }
+
   }
 
   // Editing
   .delete-item { display: none; }
   &.editing .delete-item { display: inline-block; }
+
+  //c4w 8.7
+  .edit-item { display: none; }
+  &.editing .edit-item { display: inline-block; }
+
 }

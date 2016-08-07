@@ -70,9 +70,12 @@ export default class TodoItem extends React.Component {
           />
           <span className="checkbox-custom"></span>
         </label>
+          {/*c4w 8.7
+          defaultValue={todo.text}*/}
+
         <input
           type="text"
-          defaultValue={todo.text}
+          value = {todo.text}
           placeholder="Task name"
           onFocus={this.onFocus}
           onBlur={this.onBlur}
@@ -86,6 +89,16 @@ export default class TodoItem extends React.Component {
         >
           <span className="icon-trash"></span>
         </a>
+
+        {/*c4w 8.7*/}
+        <a
+          className="edit-item"
+          href="#"
+          onClick={this.props.onClick}
+          onMouseDown={this.props.onClick}
+        >
+        <span className="icon-edit"></span>
+      </a>  
       </div>
     );
   }

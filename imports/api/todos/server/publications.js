@@ -36,3 +36,25 @@ Meteor.publishComposite('todos.inList', function todosInList(listId) {
     }],
   };
 });
+
+//c4w 8.6
+Meteor.publishComposite('todos.inTodo', function todosInTodo(todoId) {
+  new SimpleSchema({
+    todoId: { type: String },
+  }).validate({ todoId });
+
+  //const userId = this.userId;
+
+  return {
+    find() {
+      const query = {
+        _id: todoId,
+        //$or: [{ userId: { $exists: false } }, { userId }],
+      };
+
+      // We only need the _id field in this query, since it's only
+      // used to drive the child queries to get the todos
+      return Todos.find(query, { fields: Todos.publicFields });
+    },
+  };
+});
