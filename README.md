@@ -24,3 +24,12 @@ Debug 及 IDE
 ### 后端调试
 参考这篇文章：
 <https://forums.meteor.com/t/using-visual-studio-code-for-meteor-development/21058>
+
+注意几个要点：
+> 通过以下两行指示visual code 附加调试配置信息
+        "sourceMaps": true,
+        "outDir": "${workspaceRoot}/.meteor/local/build/programs/server",
+
+> 设置断点须在build下的app.js中
+> 先在终端下用命令 meteor debug 启动 5858调试端口，
+> 然后在visual code下 "debug-> 附加"
