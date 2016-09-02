@@ -99,7 +99,7 @@ export default class ListHeader extends React.Component {
     if (input.value.trim()) {
       insert.call({
         listId: this.props.list._id,
-        text: input.value,
+        title: input.value,
       }, displayError);
       input.value = '';
     }

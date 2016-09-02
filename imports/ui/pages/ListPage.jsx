@@ -32,7 +32,7 @@ export default class ListPage extends React.Component {
     this.state = {
       editingTodo: null,
       open:false,
-      childData:{text:'222'},
+      childData:{title:'222'},
       recur:2
     };
     this.onEditingChange = this.onEditingChange.bind(this);
@@ -50,7 +50,7 @@ handleToggle  (){
   handleChange(event) {
     var cd = this.state.childData;
     var value = event.target.value;
-    cd.text=value;
+    cd.title=value;
     this.setState({childData: cd});
     updateText.call({
       todoId: cd._id,

@@ -53,10 +53,10 @@ Meteor.startup(() => {
         incompleteCount: list.items.length,
       });
 
-      list.items.forEach((text) => {
+      list.items.forEach((title) => {
         Todos.insert({
           listId,
-          text,
+          title,
           createdAt: new Date(timestamp),
         });
 

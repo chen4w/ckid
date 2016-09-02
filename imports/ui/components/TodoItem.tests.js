@@ -17,7 +17,7 @@ import {
 if (Meteor.isClient) {
   describe('TodoItem', () => {
     it('should render', () => {
-      const todo = Factory.create('todo', { text: 'testing', checked: true });
+      const todo = Factory.create('todo', { title: 'testing', checked: true });
       const item = shallow(<TodoItem todo={todo} />);
       chai.assert(item.hasClass('list-item'));
       chai.assert(item.hasClass('checked'));

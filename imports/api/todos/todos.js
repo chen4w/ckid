@@ -42,7 +42,7 @@ Todos.schema = new SimpleSchema({
     regEx: SimpleSchema.RegEx.Id,
     denyUpdate: true,
   },
-  text: {
+  title: {
     type: String,
     max: 100,
   },
@@ -63,7 +63,7 @@ Todos.attachSchema(Todos.schema);
 // them here to keep them private to the server.
 Todos.publicFields = {
   listId: 1,
-  text: 1,
+  title: 1,
   createdAt: 1,
   checked: 1,
 };
@@ -73,7 +73,7 @@ Todos.publicFields = {
 //   'todo', 'emptyTodo', 'checkedTodo'
 Factory.define('todo', Todos, {
   listId: () => Factory.get('list'),
-  text: () => faker.lorem.sentence(),
+  title: () => faker.lorem.sentence(),
   createdAt: () => new Date(),
 });
 

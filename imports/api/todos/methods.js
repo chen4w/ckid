@@ -11,9 +11,9 @@ export const insert = new ValidatedMethod({
   name: 'todos.insert',
   validate: new SimpleSchema({
     listId: { type: String },
-    text: { type: String },
+    title: { type: String },
   }).validator(),
-  run({ listId, text }) {
+  run({ listId, title }) {
     const list = Lists.findOne(listId);
 
     if (list.isPrivate() && list.userId !== this.userId) {
@@ -23,7 +23,7 @@ export const insert = new ValidatedMethod({
 
     const todo = {
       listId,
-      text,
+      title,
       checked: false,
       createdAt: new Date(),
     };
@@ -74,7 +74,7 @@ export const updateText = new ValidatedMethod({
     }
 
     Todos.update(todoId, {
-      $set: { text: newText },
+      $set: { title: newText },
     });
   },
 });

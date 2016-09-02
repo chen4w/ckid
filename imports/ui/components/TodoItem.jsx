@@ -75,7 +75,7 @@ export default class TodoItem extends React.Component {
 
         <input
           type="text"
-          value = {todo.text}
+          value = {todo.title}
           placeholder="Task name"
           onFocus={this.onFocus}
           onBlur={this.onBlur}

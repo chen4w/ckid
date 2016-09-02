@@ -48,7 +48,7 @@ getChildContext() {
 
         style={{width: '90%',margin: '5%'}}
         multiLine={true}
-        value={this.props.todo.text}
+        value={this.props.todo.title}
         onChange={this.props.handleChange} 
     />
     <div style={{width:'100%'}}>

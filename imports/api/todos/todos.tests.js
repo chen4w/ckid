@@ -29,7 +29,7 @@ if (Meteor.isServer) {
       Todos.update(todo, { $set: { text } });
 
       todo = Todos.findOne(todo._id);
-      assert.equal(todo.text, text);
+      assert.equal(todo.title, text);
       assert.equal(todo.createdAt.getTime(), createdAt.getTime());
     });
 
