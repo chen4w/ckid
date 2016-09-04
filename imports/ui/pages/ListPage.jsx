@@ -17,6 +17,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {
   setCheckedStatus,
   updateText,
+  updateTodo,
   remove,
 } from '../../api/todos/methods.js';
 
@@ -35,10 +36,6 @@ export default class ListPage extends React.Component {
       childData:{title:'222'},
       recur:2
     };
-    this.onEditingChange = this.onEditingChange.bind(this);
-    this.handleToggle = this.handleToggle.bind(this);
-    this.handleChildClick = this.handleChildClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 getChildContext() {
      return { muiTheme: getMuiTheme(baseTheme) };
@@ -46,18 +43,24 @@ getChildContext() {
 
 handleToggle  (){ 
   this.setState({open: !this.state.open});
+ }
+handleOk(){
+  this.setState({open: false});
+  var cd = this.state.childData;
+  var tid = cd._id;
+  console.log(cd._id);
+  //delete cd._id;
+  updateTodo.call({
+    todoId: cd._id,
+    todoObj:{
+      title: cd.title,
+      endAt: cd.endAt,
+      desc: cd.desc
+    }
+  }, displayError);
 }
-  handleChange(event) {
-    var cd = this.state.childData;
-    var value = event.target.value;
-    cd.title=value;
-    this.setState({childData: cd});
-    updateText.call({
-      todoId: cd._id,
-      newText: value,
-    }, displayError);
-  }
-  onEditingChange(childData, editing) {
+
+onEditingChange(childData, editing) {
     //console.log('onEditingChange');
     this.setState({
       editingTodo: editing ? childData._id : null,
@@ -65,9 +68,8 @@ handleToggle  (){
     if(editing){
       this.setState({childData:childData});
     }
-  }
-  handleChildClick(childData,event) {
-    console.log('childData:'+childData);
+}
+handleChildClick(childData,event) {
     this.setState({open: true,childData:childData});
   }
   render() {
@@ -76,7 +78,7 @@ handleToggle  (){
         label="完成"
         primary={true}
         keyboardFocused={true}
-        onTouchTap={this.handleToggle}
+        onTouchTap={this.handleOk.bind(this)}
       />,
     ];
 
@@ -100,9 +102,9 @@ handleToggle  (){
         <TodoItem
           todo={todo}
           key={todo._id}
-          onClick={this.handleChildClick.bind(null,todo)}
+          onClick={this.handleChildClick.bind(this,todo)}
           editing={todo._id === editingTodo}
-          onEditingChange={this.onEditingChange.bind(null,todo)}
+          onEditingChange={this.onEditingChange.bind(this,todo)}
         />
       ));
     }
@@ -111,14 +113,12 @@ handleToggle  (){
       <div className="page lists-show">
         <Dialog
         contentStyle={{width: '100%',maxWidth: 600,}}
+        autoScrollBodyContent={true}
         actions={actions}
         modal={false}
          open={this.state.open} openSecondary={true}>
        <TodoPage  
-        handleChange={this.handleChange.bind(null)}
-        handleToggle={this.handleToggle.bind(null)}
-        todo={this.state.childData}
-        
+        todo={this.state.childData}        
        />       
         </Dialog>
       

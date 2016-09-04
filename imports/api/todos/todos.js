@@ -46,14 +46,40 @@ Todos.schema = new SimpleSchema({
     type: String,
     max: 100,
   },
+  desc: {
+    type: String,
+    max: 1000,
+    optional: true,
+  },
   createdAt: {
     type: Date,
     denyUpdate: true,
+  },
+  remindAt:{
+    type: Date,
+    optional: true,
+  },  
+  endAt:{
+    type: Date,
+    optional: true,
+  },
+  location:{
+    type: String,
+    optional: true,
+  },
+  priority:{ 
+    type: String,
+    optional: true,
   },
   checked: {
     type: Boolean,
     defaultValue: false,
   },
+  finishedAt: {
+    type: Date,
+    denyUpdate: true,
+    optional: true,
+  },  
 });
 
 Todos.attachSchema(Todos.schema);
@@ -66,6 +92,8 @@ Todos.publicFields = {
   title: 1,
   createdAt: 1,
   checked: 1,
+  endAt: 1,
+  desc: 1,
 };
 
 // TODO This factory has a name - do we have a code style for this?

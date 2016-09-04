@@ -25,13 +25,32 @@ const styles = {
 export default class TodoPage extends React.Component {
   
   constructor(props) {
+    console.log('constructor:');
     super(props);
     this.state = { 
-      date: '',
       errors: {} ,
-      value: 2
+      todo:props.todo
     };
   }
+hcTitle(event) {
+  var todo = this.state.todo;
+  var value = event.target.value;
+  todo.title=value;
+  this.setState({todo: todo});
+}
+
+hcDesc(event) {
+  var todo = this.state.todo;
+  var value = event.target.value;
+  todo.desc=value;
+  this.setState({todo: todo});
+}
+
+hcEndAt(p0,dt) {
+  var todo = this.state.todo;
+  todo.endAt=dt;
+  this.setState({todo: todo});
+}
 
  
 getChildContext() {
@@ -39,7 +58,7 @@ getChildContext() {
  }
 
   render() {
-
+    var todo = this.state.todo;
     return  <div>
       <TextField
         id="text-field-ptext"
@@ -48,22 +67,25 @@ getChildContext() {
 
         style={{width: '90%',margin: '5%'}}
         multiLine={true}
-        value={this.props.todo.title}
-        onChange={this.props.handleChange} 
+        value={todo.title}
+        onChange={this.hcTitle.bind(this)} 
     />
     <div style={{width:'100%'}}>
     <DatePicker hintText="xxxx-xx-xx"
-    floatingLabelText='截止日期'
-    floatingLabelFixed={true}
-    style={{width: '40%',margin: '5%',float: 'left'}}
+      floatingLabelText='截止日期'
+      floatingLabelFixed={true}
+      value={todo.endAt}
+      onChange={this.hcEndAt.bind(this)} 
+      style={{width: '40%',margin: '5%',float: 'left'}}
      />
     <TimePicker
       floatingLabelText='截止时间'
       floatingLabelFixed={true}
-
+      value={todo.endAt}
       style={{width: '40%',margin: '5%',float:'right'}}
       format="24hr"
       hintText="24hr"
+      onChange={this.hcEndAt.bind(this)} 
     />
     </div>
 
@@ -95,6 +117,14 @@ getChildContext() {
     </SelectField>
     </div>
 
+  <TextField
+      style={{width: '90%',margin: '5%'}}
+      floatingLabelText="备注"
+      multiLine={true}
+      rows={2}
+      value={todo.desc}
+      onChange={this.hcDesc.bind(this)} 
+    />
   </div>;
   }
 }
