@@ -44,6 +44,7 @@ export default class App extends React.Component {
     Meteor.logout();
 
     // if we are on a private list, we'll need to go to a public one
+    //console.log(this.props.params.id);
     if (this.props.params.id) {
       const list = Lists.findOne(this.props.params.id);
       if (list.userId) {

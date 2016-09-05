@@ -7,6 +7,10 @@ Meteor.startup(() => {
   if (Lists.find().count() === 0) {
     const data = [
       {
+        name: '全部',
+        items: [],
+      },
+      {
         name: 'Meteor Principles',
         items: [
           'Data on the Wire',

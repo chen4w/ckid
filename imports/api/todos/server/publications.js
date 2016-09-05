@@ -23,7 +23,7 @@ Meteor.publishComposite('todos.inList', function todosInList(listId) {
       // We only need the _id field in this query, since it's only
       // used to drive the child queries to get the todos
       const options = {
-        fields: { _id: 1 },
+        fields: { _id: 1, name: 1 },
       };
 
       return Lists.find(query, options);
@@ -31,7 +31,22 @@ Meteor.publishComposite('todos.inList', function todosInList(listId) {
 
     children: [{
       find(list) {
-        return Todos.find({ listId: list._id }, { fields: Todos.publicFields });
+        console.log('list :'+list.name+' '+list._id);
+        if(list.name=='全部'){
+          const lists = Lists.find({ $or: [
+            { userId: { $exists: false } },
+            { userId: userId },
+          ] }).fetch();
+          var cout=0;
+          let lids = lists.map((l, index) => {
+            cout+=l.incompleteCount;
+            return l._id;
+          })
+          list.incompleteCount=cout;
+          console.log('in:'+lids);
+          return Todos.find({ listId: {$in: lids} }, {fields: Todos.publicFields});   
+        }else       
+          return Todos.find({ listId: list._id }, { fields: Todos.publicFields });
       },
     }],
   };
