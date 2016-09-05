@@ -58,8 +58,13 @@ export default class TodoItem extends React.Component {
       checked: todo.checked,
       editing,
     });
-
+    const week_name=['日','一','二','三','四','五','六'];
+    const rdt = todo.remindAt;
+    const str_remind = rdt? ((rdt.getMonth()+1)+'月'+rdt.getDate()+'日' 
+      +' 星期'+ week_name[rdt.getDay()]
+      + ' '+rdt.getHours()+':'+rdt.getMinutes() ):'';
     return (
+      <div>
       <div className={todoClass}>
         <label className="checkbox">
           <input
@@ -99,6 +104,9 @@ export default class TodoItem extends React.Component {
         >
         <span className="icon-edit"></span>
       </a>  
+      
+      </div>
+      <span className="span-remind">{str_remind}</span>
       </div>
     );
   }

@@ -1,22 +1,29 @@
 @import '{}/imports/ui/stylesheets/utils.less';
 
+.span-remind{
+  font-size:.7rem;
+  color:#cccccc;
+  margin-left:44px;
+  vertical-align:top;
+}
 .list-items .list-item {
   .font-s2;
 
   // Layout of list-item children
   display: flex;
   flex-wrap: wrap;
-  height: 3rem;
+  height: 2rem;
   width: 100%;
 
   .checkbox {
     flex: 0, 0, 44px;
     cursor: pointer;
+    height: 2rem;
   }
   input[type="text"] { flex: 1; }
-  .delete-item { flex: 0 0 3rem; }
+  .delete-item { flex: 0 0 2rem; }
 //c4w 8.7
-  .edit-item { flex: 0 0 3rem; }
+  .edit-item { flex: 0 0 2rem; }
 
 
   // Style of list-item children
@@ -29,7 +36,7 @@
 
   .delete-item {
     color: @color-medium-rare;
-    line-height: 3rem;
+    line-height: 2rem;
     text-align: center;
 
     &:hover { color: @color-primary; }
@@ -39,7 +46,7 @@
 //c4w 8.7
   .edit-item {
     color: @color-medium-rare;
-    line-height: 3rem;
+    line-height: 2rem;
     text-align: center;
 
     &:hover { color: @color-primary; }

@@ -55,7 +55,10 @@ handleOk(){
     todoObj:{
       title: cd.title,
       endAt: cd.endAt,
-      desc: cd.desc
+      remindAt: cd.remindAt,
+      desc: cd.desc,
+      freType: cd.freType,
+      priority: cd.priority,
     }
   }, displayError);
 }

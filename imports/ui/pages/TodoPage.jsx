@@ -52,7 +52,25 @@ hcEndAt(p0,dt) {
   this.setState({todo: todo});
 }
 
- 
+hcRemindAt(p0,dt) {
+  var todo = this.state.todo;
+  todo.remindAt=dt;
+  this.setState({todo: todo});
+}
+
+hcFreType(evt,index,val) {
+  var todo = this.state.todo;
+  todo.freType=val;
+  this.setState({todo: todo});
+  console.log('sss')
+}
+
+hcPriority(evt,index,val) {
+  var todo = this.state.todo;
+  todo.priority=val;
+  this.setState({todo: todo});
+}
+
 getChildContext() {
      return { muiTheme: getMuiTheme(baseTheme) };
  }
@@ -70,50 +88,52 @@ getChildContext() {
         value={todo.title}
         onChange={this.hcTitle.bind(this)} 
     />
+
     <div style={{width:'100%'}}>
     <DatePicker hintText="xxxx-xx-xx"
-      floatingLabelText='截止日期'
+      floatingLabelText='提醒日期'
       floatingLabelFixed={true}
-      value={todo.endAt}
-      onChange={this.hcEndAt.bind(this)} 
+      value={todo.remindAt}
+      onChange={this.hcRemindAt.bind(this)} 
       style={{width: '40%',margin: '5%',float: 'left'}}
      />
     <TimePicker
-      floatingLabelText='截止时间'
+      floatingLabelText='提醒时间'
       floatingLabelFixed={true}
-      value={todo.endAt}
+      value={todo.remindAt}
       style={{width: '40%',margin: '5%',float:'right'}}
       format="24hr"
       hintText="24hr"
-      onChange={this.hcEndAt.bind(this)} 
+      onChange={this.hcRemindAt.bind(this)} 
     />
     </div>
 
+
     <div style={{width:'100%'}}>
-    <SelectField value={this.state.recur} 
+    <SelectField 
      style={{width: '40%',margin: '5%',float:'left'}}
     floatingLabelText='重复提醒'
     floatingLabelFixed={true}
-
+    value={todo.freType}
+    onChange={this.hcFreType.bind(this)} 
      >
-      <MenuItem value={1} primaryText="每天" />
-      <MenuItem value={2} primaryText="每周" />
-      <MenuItem value={3} primaryText="每月" />
-      <MenuItem value={4} primaryText="每年" />
+      <MenuItem value={"1"} primaryText="每天" />
+      <MenuItem value={"2"} primaryText="每周" />
+      <MenuItem value={"3"} primaryText="每月" />
+      <MenuItem value={"4"} primaryText="每年" />
     </SelectField>
 
-    <SelectField value={this.state.recur} 
+    <SelectField 
+    value={todo.priority} 
      style={{width: '40%',margin: '5%',float:'right'}}
-    floatingLabelText='提前提醒'
+    floatingLabelText='优先级'
     floatingLabelFixed={true}
-
+    onChange={this.hcPriority.bind(this)} 
      >
-      <MenuItem value={1} primaryText="当天" />
-      <MenuItem value={2} primaryText="1天" />
-      <MenuItem value={3} primaryText="2天" />
-      <MenuItem value={4} primaryText="3天" />
-      <MenuItem value={5} primaryText="5天" />
-      <MenuItem value={5} primaryText="1周" />
+      <MenuItem value={"0"} primaryText="无" />
+      <MenuItem value={"1"} primaryText="！" />
+      <MenuItem value={"2"} primaryText="！！" />
+      <MenuItem value={"3"} primaryText="！！！" />
     </SelectField>
     </div>
 

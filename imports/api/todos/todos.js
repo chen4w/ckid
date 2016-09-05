@@ -63,6 +63,10 @@ Todos.schema = new SimpleSchema({
     type: Date,
     optional: true,
   },
+  freType:{
+    type: String,
+    optional: true,
+  },
   location:{
     type: String,
     optional: true,
@@ -94,6 +98,9 @@ Todos.publicFields = {
   checked: 1,
   endAt: 1,
   desc: 1,
+  freType: 1,
+  remindAt: 1,
+  priority: 1,
 };
 
 // TODO This factory has a name - do we have a code style for this?
