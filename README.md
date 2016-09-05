@@ -13,6 +13,10 @@ Running the app
         meteor npm install
         meteor
 
+数据schema修改之后，需要运行以下命令进行Reset
+
+        meteor reset
+
 
 Debug 及 IDE
 -----------------------------------
