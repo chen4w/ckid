@@ -117,6 +117,7 @@ getChildContext() {
     value={todo.freType}
     onChange={this.hcFreType.bind(this)} 
      >
+      <MenuItem value={"0"} primaryText="无" />
       <MenuItem value={"1"} primaryText="每天" />
       <MenuItem value={"2"} primaryText="每周" />
       <MenuItem value={"3"} primaryText="每月" />

@@ -50,10 +50,29 @@ export const setCheckedStatus = new ValidatedMethod({
       throw new Meteor.Error('todos.setCheckedStatus.accessDenied',
         'Cannot edit checked status in a private list that is not yours');
     }
+    //todo 记录check日志
+    const nv=  {} 
+    //check 周期任务时,运算出下一次remindAt
+    if(newCheckedStatus && todo.remindAt && todo.freType && todo.freType!='0'){
+      let lr= todo.remindAt;
+      let nr= new Date();
+      //每天重复
+      if(todo.freType=='1'){
+        nr.setDate(lr.getDate() + 1);
+        //每周重复
+      }else if(todo.freType=='2'){
+        nr.setDate(lr.getDate() + 7);
+        //每月重复
+      }else if(todo.freType=='3'){
+        nr.setMonth(lr.getMonth() + 1);
+        //每年重复
+      }else if(todo.freType=='4'){
+        nr.setFullYear(lr.getFullYear() + 1);
+      }
+      nv.remindAt=nr;
+    }else nv.checked=true;
 
-    Todos.update(todoId, { $set: {
-      checked: newCheckedStatus,
-    } });
+    Todos.update(todoId, { $set:nv});
   },
 });
 
