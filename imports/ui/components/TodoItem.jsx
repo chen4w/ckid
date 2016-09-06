@@ -60,9 +60,14 @@ export default class TodoItem extends React.Component {
     });
     const week_name=['日','一','二','三','四','五','六'];
     const rdt = todo.remindAt;
-    const str_remind = rdt? ((rdt.getMonth()+1)+'月'+rdt.getDate()+'日' 
+    const dtn = new Date();
+    const str_remind = rdt? ((rdt.getFullYear()==dtn.getFullYear()?'':rdt.getFullYear()+'年')
+      +(rdt.getMonth()+1)+'月'+rdt.getDate()+'日' 
       +' 星期'+ week_name[rdt.getDay()]
       + ' '+rdt.getHours()+':'+rdt.getMinutes() ):'';
+    
+    const name_col = (rdt && rdt.getTime()<dtn.getTime())?'red':'#333333'
+
     return (
       <div>
       <div className={todoClass}>
@@ -75,8 +80,7 @@ export default class TodoItem extends React.Component {
           />
           <span className="checkbox-custom"></span>
         </label>
-          {/*c4w 8.7
-          defaultValue={todo.text}*/}
+          
 
         <input
           type="text"
@@ -84,6 +88,7 @@ export default class TodoItem extends React.Component {
           placeholder="Task name"
           onFocus={this.onFocus}
           onBlur={this.onBlur}
+          style={{color: name_col}}
           onChange={this.updateTodo}
         />
         <a
